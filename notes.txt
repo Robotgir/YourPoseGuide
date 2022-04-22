@@ -1,0 +1,22 @@
+squat angle -> average of angle between ankle, knee, Hip of leg1 and leg2
+
+General pose corrections
+- head looking straight
+- Head not looking down
+- Backbone straight and not bent
+- 
+
+Counter for ...
+- Squat
+- Jump
+- Deadlift
+- Jumping Jacks
+
+real-time
+
+Oak-d
+rpicam
+
+openpose
+wrnchai
+posenet
