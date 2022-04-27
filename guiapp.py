@@ -6,6 +6,9 @@ import cv2
 from tkinter import messagebox, PhotoImage
 import PIL.Image, PIL.ImageTk
 import time
+import PoseModule as pm
+from PIL import Image, ImageTk
+from tkinter.ttk import Frame, Label, Style
 
 
 class MainUI(tk.Tk):
@@ -14,16 +17,17 @@ class MainUI(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
         self.title_font = tkfont.Font(family='Helvetica', size=16, weight="bold")
         self.title("Your Pose Guide")
+        self.nontitle_font = tkfont.Font(family='Helvetica', size=16)
         self.resizable(False, False)
-        self.geometry("1500x1250")
-        #self.protocol("WM_DELETE_WINDOW", self.on_closing)
+        self.geometry("1100x700")
+        # self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.active_name = None
         container = tk.Frame(self)
         container.grid(sticky="nsew")
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
         self.frames = {}
-        for F in (StartPage, PageOne, Pagesquat):
+        for F in (StartPage, PageOne, Pagesquat, Instruction1):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -46,7 +50,7 @@ class StartPage(tk.Frame):
         label = tk.Label(self, text="        Home Page        ", font=self.controller.title_font, fg="#263942")
         label.grid(row=0, sticky="ew")
         button1 = tk.Button(self, text="   take basic poses test  ", fg="#ffffff", bg="#263942",
-                            command=lambda: self.controller.show_frame("PageOne"))
+                            command=lambda: self.controller.show_frame("Instruction1"))
         button1.grid(row=1, column=0, ipady=3, ipadx=7)
 
 
@@ -65,6 +69,99 @@ class PageOne(tk.Frame):
         self.buttoncanc = tk.Button(self, text="Cancel", bg="#ffffff", fg="#263942",
                                     command=lambda: controller.show_frame("StartPage"))
         self.buttoncanc.grid(row=10, column=0, pady=10, ipadx=5, ipady=4)
+
+
+class Pagesquat(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        self.buttondemo = tk.Button(self, text="play demo", fg="#ffffff", bg="#263942",
+                                    command=lambda: self.demovideo())
+        self.buttontest_squat = tk.Button(self, text="test your squat", fg="#ffffff", bg="#263942",
+                                          command=lambda: self.controller.show_frame("Instruction1"))
+        self.buttondemo.grid(row=1, column=1, pady=10, ipadx=5, ipady=4)
+        self.buttontest_squat.grid(row=2, column=1, pady=10, ipadx=5, ipady=4)
+
+
+class Instruction1(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        label = tk.Label(self, text="        Instructions to follow for completing Squat test       ",
+                         font=self.controller.title_font, fg="#263942")
+        label.grid(row=0, sticky="ew")
+        label = tk.Label(self, text="      Click next and distance yourself from the camera until your whole body fits in the laptop screen as shown in below image       ",
+                         font=self.controller.nontitle_font, fg="#263942")
+        label.grid(row=2, sticky="ew")
+        label = tk.Label(self,
+                         text="        Once the correct symbol appears  on the screen the countdown of 5 seconds starts       ",
+                         font=self.controller.nontitle_font, fg="#263942")
+        label.grid(row=3, sticky="ew")
+        label = tk.Label(self,
+                         text="        After the countdown perform 3 Squats, recording will automatically stop after three squats       ",
+                         font=self.controller.nontitle_font, fg="#263942")
+        label.grid(row=4, sticky="ew")
+        label = tk.Label(self,
+                         text="       Continue following further instructions at that point ...       ",
+                         font=self.controller.nontitle_font, fg="#263942")
+        label.grid(row=5, sticky="ew")
+        imagefit = Image.open("images/front_1_small.png")
+        fitscreen= ImageTk.PhotoImage(imagefit)
+        label = Label(self, image=fitscreen)
+        label.image = fitscreen
+
+        #img = tk.Label(self, image=render)
+        #img.image = render
+        #img.grid(row=2, column=1, rowspan=4, sticky="nsew")
+        label.place(x=270,y=300)
+        self.buttonext = tk.Button(self, text="Next", command=self.nextfoo, fg="#ffffff", bg="#263942")
+        self.buttonext.grid(row=7, ipadx=5, ipady=4, pady=10)
+
+    def demovideo(self):
+        cap = cv2.VideoCapture('demovideos\squat.mp4')
+        if (cap.isOpened() == False):
+            print("Error opening video stream or file")
+        while (cap.isOpened()):
+            # Capture frame-by-frame
+            ret, frame = cap.read()
+            if ret == True:
+                # Display the resulting frame
+                cv2.imshow('Frame', frame)
+                # Press Q on keyboard to  exit
+                if cv2.waitKey(25) & 0xFF == ord('q'):
+                    break
+            # Break the loop
+            else:
+                break
+        cap.release()
+        # Closes all the frames
+        cv2.destroyAllWindows()
+
+    def posedetection(self, video_source=0):
+        cap = cv2.VideoCapture(video_source)
+        pTime = 0
+        detector = pm.poseDetector()
+        while True:
+            success, img = cap.read()
+            img = detector.findPose(img)
+            lmList = detector.findPosition(img, draw=False)
+            if len(lmList) != 0:
+                print(lmList[14])
+                cv2.circle(img, (lmList[14][1], lmList[14][2]), 15, (0, 0, 255), cv2.FILLED)
+
+            cTime = time.time()
+            fps = 1 / (cTime - pTime)
+            pTime = cTime
+
+            cv2.putText(img, str(int(fps)), (70, 50), cv2.FONT_HERSHEY_PLAIN, 3,
+                        (255, 0, 0), 3)
+
+            cv2.imshow("Image", img)
+            cv2.waitKey(1)
+
+    def nextfoo(self):
+        self.posedetection()
+
 
 class App:
     def __init__(self, window, window_title, video_source='demovideos\squat.mp4'):
@@ -106,6 +203,7 @@ class App:
 
         self.window.after(self.delay, self.update)
 
+
 class MyVideoCapture:
     def __init__(self, video_source='demovideos\squat.mp4'):
         # Open the video source
@@ -133,32 +231,6 @@ class MyVideoCapture:
         if self.vid.isOpened():
             self.vid.release()
 
-class Pagesquat(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
-        self.buttonext = tk.Button(self, text="play demo", fg="#ffffff", bg="#263942", command=lambda: self.demovideo())
-        self.buttonext.grid(row=1, column=1, pady=10, ipadx=5, ipady=4)
-
-    def demovideo(self):
-        cap = cv2.VideoCapture('demovideos\squat.mp4')
-        if (cap.isOpened() == False):
-            print("Error opening video stream or file")
-        while (cap.isOpened()):
-            # Capture frame-by-frame
-            ret, frame = cap.read()
-            if ret == True:
-                # Display the resulting frame
-                cv2.imshow('Frame', frame)
-                # Press Q on keyboard to  exit
-                if cv2.waitKey(25) & 0xFF == ord('q'):
-                    break
-            # Break the loop
-            else:
-                break
-        cap.release()
-        # Closes all the frames
-        cv2.destroyAllWindows()
 
 app = MainUI()
 app.mainloop()
