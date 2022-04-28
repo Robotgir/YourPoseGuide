@@ -9,6 +9,7 @@ import time
 import PoseModule as pm
 from PIL import Image, ImageTk
 from tkinter.ttk import Frame, Label, Style
+import HolisticModule as hm
 
 
 class MainUI(tk.Tk):
@@ -114,7 +115,7 @@ class Instruction1(tk.Frame):
         #img.image = render
         #img.grid(row=2, column=1, rowspan=4, sticky="nsew")
         label.place(x=270,y=300)
-        self.buttonext = tk.Button(self, text="Next", command=self.nextfoo, fg="#ffffff", bg="#263942")
+        self.buttonext = tk.Button(self, text="Next", command=self.holisticDetection, fg="#ffffff", bg="#263942")
         self.buttonext.grid(row=7, ipadx=5, ipady=4, pady=10)
 
     def demovideo(self):
@@ -159,8 +160,13 @@ class Instruction1(tk.Frame):
             cv2.imshow("Image", img)
             cv2.waitKey(1)
 
+    def holisticDetection(self):
+        holisticobj = hm.holistic()
+        holisticobj.findHolistic(video_source=0)
+
     def nextfoo(self):
-        self.posedetection()
+        self.holisticDetection()
+
 
 
 class App:

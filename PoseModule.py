@@ -70,6 +70,7 @@ class poseDetector():
                         cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
         return angle
 
+
 def main():
     cap = cv2.VideoCapture('demovideos/squat.mp4')
     pTime = 0
@@ -78,6 +79,7 @@ def main():
         success, img = cap.read()
         img = detector.findPose(img)
         lmList = detector.findPosition(img, draw=False)
+        print(len(lmList))
         if len(lmList) != 0:
             print(lmList[14])
             cv2.circle(img, (lmList[14][1], lmList[14][2]), 15, (0, 0, 255), cv2.FILLED)
