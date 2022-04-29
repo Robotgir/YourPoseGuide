@@ -10,7 +10,7 @@ import PoseModule as pm
 from PIL import Image, ImageTk
 from tkinter.ttk import Frame, Label, Style
 import HolisticModule as hm
-
+from tkinter import ttk
 
 class MainUI(tk.Tk):
 
@@ -20,10 +20,10 @@ class MainUI(tk.Tk):
         self.title("Your Pose Guide")
         self.nontitle_font = tkfont.Font(family='Helvetica', size=16)
         self.resizable(False, False)
-        self.geometry("1100x700")
+        self.geometry("1300x700")
         # self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.active_name = None
-        container = tk.Frame(self)
+        container = ttk.Frame(self, padding=(0,0,300,300))
         container.grid(sticky="nsew")
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
@@ -76,47 +76,54 @@ class Pagesquat(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.buttondemo = tk.Button(self, text="play demo", fg="#ffffff", bg="#263942",
+        buttondemo = tk.Button(self, text="play demo", fg="#ffffff", bg="#263942",
                                     command=lambda: self.demovideo())
-        self.buttontest_squat = tk.Button(self, text="test your squat", fg="#ffffff", bg="#263942",
+        buttontest_squat = tk.Button(self, text="test your squat", fg="#ffffff", bg="#263942",
                                           command=lambda: self.controller.show_frame("Instruction1"))
-        self.buttondemo.grid(row=1, column=1, pady=10, ipadx=5, ipady=4)
-        self.buttontest_squat.grid(row=2, column=1, pady=10, ipadx=5, ipady=4)
+        buttondemo.grid(row=1, column=1, pady=10, ipadx=5, ipady=4)
+        buttontest_squat.grid(row=2, column=1, pady=10, ipadx=5, ipady=4)
 
-
+'''
 class Instruction1(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="        Instructions to follow for completing Squat test       ",
+        label1 = tk.Label(self, text="        Instructions to follow for completing Squat test       ",
                          font=self.controller.title_font, fg="#263942")
-        label.grid(row=0, sticky="ew")
-        label = tk.Label(self, text="      Click next and distance yourself from the camera until your whole body fits in the laptop screen as shown in below image       ",
+        label1.grid(row=0, sticky="ew")
+        label2 = tk.Label(self, text="Click next and distance yourself from the camera until your whole body fits in the laptop screen as shown in below images respectively ...",
                          font=self.controller.nontitle_font, fg="#263942")
-        label.grid(row=2, sticky="ew")
-        label = tk.Label(self,
-                         text="        Once the correct symbol appears  on the screen the countdown of 5 seconds starts       ",
+        label2.grid(row=2, column=0, columnspan=3, sticky="ew")
+        label3 = tk.Label(self,
+                         text="Once the correct symbol appears  on the screen the countdown of 5 seconds starts.",
                          font=self.controller.nontitle_font, fg="#263942")
-        label.grid(row=3, sticky="ew")
-        label = tk.Label(self,
-                         text="        After the countdown perform 3 Squats, recording will automatically stop after three squats       ",
+        label3.grid(row=3,column=0, columnspan=3,  sticky="ew")
+        label4 = tk.Label(self,
+                         text="After the countdown perform 3 Squats, recording will automatically stop after three squats ...",
                          font=self.controller.nontitle_font, fg="#263942")
-        label.grid(row=4, sticky="ew")
-        label = tk.Label(self,
-                         text="       Continue following further instructions at that point ...       ",
+        label4.grid(row=4, sticky="ew")
+        label5 = tk.Label(self,
+                         text=" Repeat the above instructions for capturing front and side poses ",
                          font=self.controller.nontitle_font, fg="#263942")
-        label.grid(row=5, sticky="ew")
+        label5.grid(row=5, sticky="ew")
         imagefit = Image.open("images/front_1_small.png")
         fitscreen= ImageTk.PhotoImage(imagefit)
-        label = Label(self, image=fitscreen)
-        label.image = fitscreen
+        labelimg1 = Label(self, image=fitscreen)
+        labelimg1.image = fitscreen
+
+        imagefit_side = Image.open("images/side_realhuman.jpg")
+        fitscreen_s = ImageTk.PhotoImage(imagefit_side)
+        labelimg2 = Label(self, image=fitscreen_s)
+        labelimg2.image = fitscreen_s
 
         #img = tk.Label(self, image=render)
         #img.image = render
         #img.grid(row=2, column=1, rowspan=4, sticky="nsew")
-        label.place(x=270,y=300)
-        self.buttonext = tk.Button(self, text="Next", command=self.holisticDetection, fg="#ffffff", bg="#263942")
-        self.buttonext.grid(row=7, ipadx=5, ipady=4, pady=10)
+        #label.place(x=270,y=300)
+        labelimg1.grid(column=0, row=7, rowspan=5, columnspan=3)
+        labelimg2.grid(column=4, row=7, rowspan=5, columnspan=3)
+        buttonext = tk.Button(self, text="Next", command=self.holisticDetection, fg="#ffffff", bg="#263942")
+        buttonext.grid(row=8,column=0, ipadx=5, ipady=4, pady=10)
 
     def demovideo(self):
         cap = cv2.VideoCapture('demovideos\squat.mp4')
@@ -167,6 +174,98 @@ class Instruction1(tk.Frame):
     def nextfoo(self):
         self.holisticDetection()
 
+'''
+
+class Instruction1(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        label1 = tk.Label(self, text="Instructions to follow for completing Squat test",
+                         font=self.controller.title_font, fg="#263942")
+        label1.grid(row=0, column =0, columnspan =7, rowspan=2, sticky="nsew")
+        label2 = tk.Label(self, text="Click next and distance yourself until you fit inside your laptop screen...",
+                         font=self.controller.nontitle_font, fg="#263942")
+        label2.grid(row=3, column=0, columnspan=7, sticky="ew")
+        label3 = tk.Label(self,text="Saw correct symbol ? countdown for 5 starts now !!",
+                         font=self.controller.nontitle_font, fg="#263942")
+        label3.grid(row=4,column=0, columnspan=7,  sticky="ew")
+        label4 = tk.Label(self,
+                         text="do 3 x squat, facing the cam",
+                         font=self.controller.nontitle_font, fg="#263942")
+        label4.grid(row=5,column=0,columnspan=7)
+        label5 = tk.Label(self,
+                         text=" Repeat 3 x squat with your side facing the cam",
+                         font=self.controller.nontitle_font, fg="#263942")
+        label5.grid(row=6,column=0,columnspan=7)
+        imagefit = Image.open("images/front_2_small.png")
+        fitscreen= ImageTk.PhotoImage(imagefit)
+        labelimg1 = Label(self, image=fitscreen)
+        labelimg1.image = fitscreen
+
+        imagefit_side = Image.open("images/side_2_small.png")
+        fitscreen_s = ImageTk.PhotoImage(imagefit_side)
+        labelimg2 = Label(self, image=fitscreen_s)
+        labelimg2.image = fitscreen_s
+
+        #img = tk.Label(self, image=render)
+        #img.image = render
+        #img.grid(row=2, column=1, rowspan=4, sticky="nsew")
+        #label.place(x=270,y=300)
+        labelimg1.grid(column=0, row=7, rowspan=5, columnspan=3)
+        labelimg2.grid(column=4, row=7, rowspan=5, columnspan=3)
+        buttonext = tk.Button(self, text="Next", command=self.holisticDetection, fg="#ffffff", bg="#263942")
+        buttonext.grid(row=12,column=1, ipadx=5, ipady=4, pady=10)
+        buttonext = tk.Button(self, text="Next", command=self.holisticDetection, fg="#ffffff", bg="#263942")
+        buttonext.grid(row=12, column=5, ipadx=5, ipady=4, pady=10)
+
+    def demovideo(self):
+        cap = cv2.VideoCapture('demovideos\squat.mp4')
+        if (cap.isOpened() == False):
+            print("Error opening video stream or file")
+        while (cap.isOpened()):
+            # Capture frame-by-frame
+            ret, frame = cap.read()
+            if ret == True:
+                # Display the resulting frame
+                cv2.imshow('Frame', frame)
+                # Press Q on keyboard to  exit
+                if cv2.waitKey(25) & 0xFF == ord('q'):
+                    break
+            # Break the loop
+            else:
+                break
+        cap.release()
+        # Closes all the frames
+        cv2.destroyAllWindows()
+
+    def posedetection(self, video_source=0):
+        cap = cv2.VideoCapture(video_source)
+        pTime = 0
+        detector = pm.poseDetector()
+        while True:
+            success, img = cap.read()
+            img = detector.findPose(img)
+            lmList = detector.findPosition(img, draw=False)
+            if len(lmList) != 0:
+                print(lmList[14])
+                cv2.circle(img, (lmList[14][1], lmList[14][2]), 15, (0, 0, 255), cv2.FILLED)
+
+            cTime = time.time()
+            fps = 1 / (cTime - pTime)
+            pTime = cTime
+
+            cv2.putText(img, str(int(fps)), (70, 50), cv2.FONT_HERSHEY_PLAIN, 3,
+                        (255, 0, 0), 3)
+
+            cv2.imshow("Image", img)
+            cv2.waitKey(1)
+
+    def holisticDetection(self):
+        holisticobj = hm.holistic()
+        holisticobj.findHolistic(video_source=0)
+
+    def nextfoo(self):
+        self.holisticDetection()
 
 
 class App:
