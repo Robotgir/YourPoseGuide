@@ -11,6 +11,7 @@ from PIL import Image, ImageTk
 from tkinter.ttk import Frame, Label, Style
 import HolisticModule as hm
 from tkinter import ttk
+import math
 
 class MainUI(tk.Tk):
 
@@ -186,7 +187,7 @@ class Instruction1(tk.Frame):
         label2 = tk.Label(self, text="Click next and distance yourself until you fit inside your laptop screen...",
                          font=self.controller.nontitle_font, fg="#263942")
         label2.grid(row=3, column=0, columnspan=7, sticky="ew")
-        label3 = tk.Label(self,text="Saw correct symbol ? countdown for 5 starts now !!",
+        label3 = tk.Label(self,text="Saw correct symbol ? show a thumbs up! countdown for 5 starts now !!",
                          font=self.controller.nontitle_font, fg="#263942")
         label3.grid(row=4,column=0, columnspan=7,  sticky="ew")
         label4 = tk.Label(self,
@@ -213,10 +214,17 @@ class Instruction1(tk.Frame):
         #label.place(x=270,y=300)
         labelimg1.grid(column=0, row=7, rowspan=5, columnspan=3)
         labelimg2.grid(column=4, row=7, rowspan=5, columnspan=3)
-        buttonext = tk.Button(self, text="Next", command=self.holisticDetection, fg="#ffffff", bg="#263942")
+
+        holisticObj=hm.holisticDetector()
+        buttonext = tk.Button(self, text="Next", command=lambda: holisticObj.fitPosekeypinScreenCheck(), fg="#ffffff", bg="#263942")
         buttonext.grid(row=12,column=1, ipadx=5, ipady=4, pady=10)
-        buttonext = tk.Button(self, text="Next", command=self.holisticDetection, fg="#ffffff", bg="#263942")
+        buttonext = tk.Button(self, text="Next", command=lambda: holisticObj.fitPosekeypinScreenCheck(), fg="#ffffff", bg="#263942")
         buttonext.grid(row=12, column=5, ipadx=5, ipady=4, pady=10)
+
+   # def allKeypointsInscreenCheck(self):
+        #holisticdetection and other tasks have to run parallely to check if all keypoints are in thelaptop screen
+
+
 
     def demovideo(self):
         cap = cv2.VideoCapture('demovideos\squat.mp4')
@@ -260,9 +268,11 @@ class Instruction1(tk.Frame):
             cv2.imshow("Image", img)
             cv2.waitKey(1)
 
-    def holisticDetection(self):
-        holisticobj = hm.holistic()
-        holisticobj.findHolistic(video_source=0)
+    def allPoseKPinframe_check(self,video_source):
+        holisticobj = hm.holisticDetector
+        kp=holisticobj.numKeypoints(video_source)
+        print(kp)
+
 
     def nextfoo(self):
         self.holisticDetection()
