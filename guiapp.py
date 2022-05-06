@@ -13,6 +13,7 @@ import HolisticModule as hm
 from tkinter import ttk
 import math
 count=0
+scount=0
 global a
 global b
 class MainUI(tk.Tk):
@@ -218,10 +219,10 @@ class Instruction1(tk.Frame):
         labelimg2.grid(column=4, row=7, rowspan=5, columnspan=3)
 
         holisticObj=hm.holisticDetector()
-        buttonext = tk.Button(self, text="Next", command=lambda: holisticObj.fitPosekeypinScreenCheck(count), fg="#ffffff", bg="#263942")
-        buttonext.grid(row=12,column=1, ipadx=5, ipady=4, pady=10)
-        buttonext = tk.Button(self, text="Next", command=lambda: holisticObj.fitPosekeypinScreenCheck(count), fg="#ffffff", bg="#263942")
-        buttonext.grid(row=12, column=5, ipadx=5, ipady=4, pady=10)
+        buttonext1 = tk.Button(self, text="Next", command=lambda: holisticObj.fitPosekeypinScreenCheck(count,scount,front=True), fg="#ffffff", bg="#263942")
+        buttonext1.grid(row=12,column=1, ipadx=5, ipady=4, pady=10)
+        buttonext2 = tk.Button(self, text="Next", command=lambda: holisticObj.fitPosekeypinScreenCheck(count, scount,front=False), fg="#ffffff", bg="#263942")
+        buttonext2.grid(row=12, column=5, ipadx=5, ipady=4, pady=10)
 
    # def allKeypointsInscreenCheck(self):
         #holisticdetection and other tasks have to run parallely to check if all keypoints are in thelaptop screen
