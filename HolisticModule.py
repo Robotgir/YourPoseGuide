@@ -306,9 +306,10 @@ class holisticDetector():
         # variables for video capturing
         width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
-        writer_front = cv2.VideoWriter('frontvideo.mp4', cv2.VideoWriter_fourcc(*'DIVX'), 20, (width, height))
-        writer_side = cv2.VideoWriter('sidevideo.mp4', cv2.VideoWriter_fourcc(*'DIVX'), 20, (width, height))
+        if front:
+            writer_front = cv2.VideoWriter('frontvideo.mp4', cv2.VideoWriter_fourcc(*'DIVX'), 20, (width, height))
+        else:
+            writer_side = cv2.VideoWriter('sidevideo.mp4', cv2.VideoWriter_fourcc(*'DIVX'), 20, (width, height))
 
         # Initiate holistic model
         with detector.mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
