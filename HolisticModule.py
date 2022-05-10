@@ -3,8 +3,9 @@ import cv2
 import time
 import math
 import numpy as np
-import screeninfo
-from mediapipe.framework.formats import landmark_pb2
+
+a = False
+b = False
 
 
 class holisticDetector():
@@ -22,73 +23,45 @@ class holisticDetector():
         return (int((p1[0] + p2[0]) / 2), int((p1[1] + p2[1]) / 2))
 
     def levelIndicator(self, image, count):
-        # Start coordinate, here (100, 50)
-        # represents the top left corner of rectangle
-        start_point = (600, 50)
-        # Ending coordinate, here (125, 80)
-        # represents the bottom right corner of rectangle
-        end_point = (625, 350)
-        # Black color in BGR
-        color = (255, 255, 255)
-        # Line thickness of -1 px
-        # Thickness of -1 will fill the entire shape
-        thickness = 4
-        # Using cv2.rectangle() method
-        # Draw a rectangle of black color of thickness -1 px
-        cv2.rectangle(image, start_point, end_point, color, thickness)
+        is_full = False
+        final_count = 0
 
         def level(spoint, epoint, color_, thickness_):
             return cv2.rectangle(image, spoint, epoint, color_, thickness_)
 
+        # background for level indicator
+        level((600, 50), (625, 350), (0, 0, 0), -1)
         if count == 0:
             level((600, 300), (625, 350), (0, 0, 255), -1)
         elif count == 1:
-            level((600, 300), (625, 350), (255, 0, 0), -1)
-        elif count == 2:
             level((600, 250), (625, 350), (255, 0, 0), -1)
-        elif count == 3:
-            level((600, 200), (625, 350), (255, 0, 0), -1)
-        elif count == 4:
+        elif count == 2:
             level((600, 150), (625, 350), (255, 0, 0), -1)
+        elif count == 3:
+            level((600, 100), (625, 350), (255, 0, 0), -1)
+        elif count == 4:
+            level((600, 50), (625, 350), (255, 0, 0), -1)
+            is_full = True
+            final_count = count
+
+        ''' # to increase number of squats for analysis
         elif count == 5:
             level((600, 100), (625, 350), (255, 0, 0), -1)
         elif count == 6:
             level((600, 50), (625, 350), (255, 0, 0), -1)
-
         '''
-                def level(spoint, epoint, color_, thickness_):
-            return cv2.rectangle(image, spoint, epoint, color_, thickness_)
-
-        default = level((600, 300), (625, 350), (0, 0, 255), -1)
-        level1 = level((600, 300), (625, 350), (255, 0, 0), -1)
-        level2 = level((600, 250), (625, 350), (255, 0, 0), -1)
-        level3 = level((600, 200), (625, 350), (255, 0, 0), -1)
-        level4 = level((600, 150), (625, 350), (255, 0, 0), -1)
-        level5 = level((600, 100), (625, 350), (255, 0, 0), -1)
-        level6 = level((600, 50), (625, 350), (255, 0, 0), -1)
-
-        level_dict = {
-            1: default,
-            2: level1,
-            4: level2,
-            6: level3,
-            8: level4,
-            10: level5,
-            12: level6,
-
-        }
-        level_dict.get(count)
-        '''
-
-        return
+        # border for level indicator
+        level((600, 50), (625, 350), (255, 255, 255), 4)
+        return is_full, final_count
 
     # front squat counter Start
     def frontSquatCounter(self, results, image, count, draw):
         global a
         global b
+
         # distance between kepoints of elbows and knees should reach a threshold
         # keypoint of elbows and knees
-        # right_elbow 14; left_elbow 13; right_knee 26; left_knee 25
+        # right_elbow 14; left_elbow 13; right_knee 26; left_knee 25; right_ear 8; left_ear 7
         # draw line between 14 and 13, l1, draw line between 26 and 25, l2, find mid-points,m1, m2 of two line segments
         # if the distance between the two midpoints crosses the threshold then count a squat
         # get coordinates of these points.
@@ -96,9 +69,14 @@ class holisticDetector():
             kp_info = self.poseKeypoints_info(results, image)
             # print(np.shape(kp_info))
             # print(kp_info[14][2])
-
+            '''
+            # if considering midpoint of elbows
             up1 = (kp_info[14][2], kp_info[14][3])
             up2 = (kp_info[13][2], kp_info[13][3])
+            '''
+            # if considering midpoint of eyes
+            up1 = (kp_info[8][2], kp_info[8][3])
+            up2 = (kp_info[7][2], kp_info[7][3])
             lp1 = (kp_info[26][2], kp_info[26][3])
             lp2 = (kp_info[25][2], kp_info[25][3])
 
@@ -110,11 +88,11 @@ class holisticDetector():
             print(dist)
             a = False
 
-            if dist < 150:
+            if dist < 250:
                 a = True
                 print('atrue')
 
-            if dist > 200:
+            if dist > 250:
                 b = True
                 print('btrue')
 
@@ -124,7 +102,6 @@ class holisticDetector():
                 a = False
                 b = False
 
-            # self.levelIndicator(image,count)
             if draw:
                 cv2.circle(image, (up1[0], up1[1]), 5, (255, 0, 0), cv2.FILLED)
                 cv2.circle(image, (up2[0], up2[1]), 5, (255, 0, 0), cv2.FILLED)
@@ -138,7 +115,7 @@ class holisticDetector():
 
         return count
 
-    #front squat counter end
+    # front squat counter end
     def sideSquatCounter(self, results, image, scount, draw=True):
         global a
         global b
@@ -160,7 +137,7 @@ class holisticDetector():
             kp_info = self.poseKeypoints_info(results, image)
             # print(np.shape(kp_info))
             # print(kp_info[14][2])
-            #coordinates of keypoints
+            # coordinates of keypoints
             right_ankle_cd = (kp_info[28][2], kp_info[28][3])
             right_knee_cd = (kp_info[26][2], kp_info[26][3])
             right_hip_cd = (kp_info[24][2], kp_info[24][3])
@@ -168,21 +145,21 @@ class holisticDetector():
             right_ankle = (kp_info[28][2], -kp_info[28][3])
             right_knee = (kp_info[26][2], -kp_info[26][3])
             right_hip = (kp_info[24][2], -kp_info[24][3])
-            lr1_vector =[right_knee[0]-right_ankle[0], right_knee[1]-right_ankle[1]]
+            lr1_vector = [right_knee[0] - right_ankle[0], right_knee[1] - right_ankle[1]]
             lr2_vector = [right_knee[0] - right_hip[0], right_knee[1] - right_hip[1]]
-            unit_vector_lr1= lr1_vector / np.linalg.norm(lr1_vector)
+            unit_vector_lr1 = lr1_vector / np.linalg.norm(lr1_vector)
             unit_vector_lr2 = lr2_vector / np.linalg.norm(lr2_vector)
             dot_product = np.dot(unit_vector_lr1, unit_vector_lr2)
-            ar= math.degrees(np.arccos(dot_product))
+            ar = math.degrees(np.arccos(dot_product))
 
             print(ar)
             a = False
 
-            if ar < 120:
+            if ar < 140:
                 a = True
                 print('atrue')
 
-            if ar > 165:
+            if ar > 170:
                 b = True
                 print('btrue')
 
@@ -192,7 +169,6 @@ class holisticDetector():
                 a = False
                 b = False
 
-            # self.levelIndicator(image,count)
             if draw:
                 cv2.circle(image, (right_ankle_cd[0], right_ankle_cd[1]), 5, (255, 0, 0), cv2.FILLED)
                 cv2.circle(image, (right_knee_cd[0], right_knee_cd[1]), 5, (255, 0, 0), cv2.FILLED)
@@ -205,9 +181,10 @@ class holisticDetector():
                             (255, 255, 255), 2, cv2.LINE_AA)
 
         return scount
-    #side squat counter start
 
-    #side squat counter end
+    # side squat counter start
+
+    # side squat counter end
     def poseKeypoints_info(self, results, image):
         list = []
         if results.pose_landmarks:
@@ -222,6 +199,7 @@ class holisticDetector():
             # print(np.shape(list))
             # print(list)
         return list
+
     def fitPosekeypinScreenCheckSide(self, size, mask1, logo1, mask2, logo2, results, cap, image):
 
         istrue = False
@@ -230,7 +208,7 @@ class holisticDetector():
             list_rightside = [list[12][:], list[14][:], list[16][:], list[24][:], list[26][:], list[28][:],
                               list[32][:], list[8][:]]
             list_leftside = [list[11][:], list[13][:], list[15][:], list[23][:], list[25][:], list[27][:]]
-            if all((0.5 <= j <= 1.0) for i, j, k, l in list_rightside) :
+            if all((0.5 <= j <= 1.0) for i, j, k, l in list_rightside):
                 # Region of Interest (ROI), where we want
                 # to insert logo
                 ret1, frame = cap.read()
@@ -328,73 +306,87 @@ class holisticDetector():
                 if front:
                     frame, screenfit = self.fitPosekeypinScreenCheckFront(size, mask1, logo1, mask2, logo2, results,
                                                                           cap, image)
-                    self.levelIndicator(frame, count)
+                    is_full, final_count = self.levelIndicator(frame, count)
                     if screenfit:
                         count = self.frontSquatCounter(results, frame, count, draw=True)
 
                         if count == 0:
                             # adding note on the live screen before starting squats: START
-                            # cv2.putText(frame, "Hello World!!!", (200, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255))
-                            cv2.putText(frame, "Start", (180, 150), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 255, 255), 16,
+                            cv2.putText(frame, "FACE TOWARDS CAMERA !", (60, 100), cv2.FONT_HERSHEY_COMPLEX, 1.3,
+                                        (255, 255, 255), 16,
                                         cv2.LINE_AA)
-                            cv2.putText(frame, "doing", (180, 230), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 255, 255), 16,
+
+                            cv2.putText(frame, "Fill up the Bar ->", (80, 200), cv2.FONT_HERSHEY_COMPLEX, 1.5,
+                                        (255, 255, 255), 16,
                                         cv2.LINE_AA)
-                            cv2.putText(frame, "squats...", (180, 310), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 255, 255),
+                            cv2.putText(frame, "By doing", (80, 280), cv2.FONT_HERSHEY_COMPLEX, 1.5, (255, 255, 255),
+                                        16,
+                                        cv2.LINE_AA)
+                            cv2.putText(frame, "squats...", (80, 360), cv2.FONT_HERSHEY_COMPLEX, 1.5, (255, 255, 255),
                                         16,
                                         cv2.LINE_AA)
 
-                            cv2.putText(frame, "Start", (180, 150), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 0, 0), 4,
+                            cv2.putText(frame, "FACE TOWARDS CAMERA !", (60, 100), cv2.FONT_HERSHEY_COMPLEX, 1.3,
+                                        (0, 0, 255), 4,
                                         cv2.LINE_AA)
-                            cv2.putText(frame, "doing", (180, 230), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 0, 0), 4,
+                            cv2.putText(frame, "Fill up the Bar ->", (80, 200), cv2.FONT_HERSHEY_COMPLEX, 1.5,
+                                        (255, 0, 0), 4,
                                         cv2.LINE_AA)
-                            cv2.putText(frame, "squats...", (180, 310), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 0, 0), 4,
+                            cv2.putText(frame, "By doing", (80, 280), cv2.FONT_HERSHEY_COMPLEX, 1.5, (255, 0, 0), 4,
+                                        cv2.LINE_AA)
+                            cv2.putText(frame, "squats...", (80, 360), cv2.FONT_HERSHEY_COMPLEX, 1.5, (255, 0, 0), 4,
                                         cv2.LINE_AA)
                             # adding note on the live screen before starting squats: END
 
-                    if 1 <= count <= 6:
+                    if 1 <= count >= final_count:
                         writer_front.write(frame)
                         frame = self.rescale_frame(frame, percent=150)
-                        if count == 6:
+                        if count == final_count:
                             cap.release()
                             cv2.destroyAllWindows()
                 else:
                     frame, screenfit = self.fitPosekeypinScreenCheckSide(size, mask1, logo1, mask2, logo2, results,
-                                                                          cap, image)
-                    self.levelIndicator(frame, scount)
+                                                                         cap, image)
+                    is_full, final_count = self.levelIndicator(frame, scount)
                     if screenfit:
                         scount = self.sideSquatCounter(results, frame, scount, draw=True)
 
                         if scount == 0:
                             # adding note on the live screen before starting squats: START
-                            # cv2.putText(frame, "Hello World!!!", (200, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255))
-                            cv2.putText(frame, "Start", (180, 150), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 255, 255), 16,
+                            cv2.putText(frame, "FACE SIDEWAYS --> TO CAMERA !", (50, 100), cv2.FONT_HERSHEY_COMPLEX, 0.9,
+                                        (255, 255, 255), 16,
                                         cv2.LINE_AA)
-                            cv2.putText(frame, "doing", (180, 230), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 255, 255), 16,
+
+                            cv2.putText(frame, "Fill up the Bar ->", (80, 200), cv2.FONT_HERSHEY_COMPLEX, 1.5,
+                                        (255, 255, 255), 16,
                                         cv2.LINE_AA)
-                            cv2.putText(frame, "squats...", (180, 310), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 255, 255),
+                            cv2.putText(frame, "By doing", (80, 280), cv2.FONT_HERSHEY_COMPLEX, 1.5, (255, 255, 255),
+                                        16,
+                                        cv2.LINE_AA)
+                            cv2.putText(frame, "squats...", (80, 360), cv2.FONT_HERSHEY_COMPLEX, 1.5, (255, 255, 255),
                                         16,
                                         cv2.LINE_AA)
 
-                            cv2.putText(frame, "Start", (180, 150), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 0, 0), 4,
+                            cv2.putText(frame, "FACE SIDEWAYS --> TO CAMERA !", (50, 100), cv2.FONT_HERSHEY_COMPLEX, 0.9,
+                                        (0, 0, 255), 4,
                                         cv2.LINE_AA)
-                            cv2.putText(frame, "doing", (180, 230), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 0, 0), 4,
+                            cv2.putText(frame, "Fill up the Bar ->", (80, 200), cv2.FONT_HERSHEY_COMPLEX, 1.5,
+                                        (255, 0, 0), 4,
                                         cv2.LINE_AA)
-                            cv2.putText(frame, "squats...", (180, 310), cv2.FONT_HERSHEY_COMPLEX, 3, (255, 0, 0), 4,
+                            cv2.putText(frame, "By doing", (80, 280), cv2.FONT_HERSHEY_COMPLEX, 1.5, (255, 0, 0), 4,
+                                        cv2.LINE_AA)
+                            cv2.putText(frame, "squats...", (80, 360), cv2.FONT_HERSHEY_COMPLEX, 1.5, (255, 0, 0), 4,
                                         cv2.LINE_AA)
                             # adding note on the live screen before starting squats: END
 
-                    if 1 <= scount <= 6:
+                    if 1 <= scount >= final_count:
                         writer_side.write(frame)
                         frame = self.rescale_frame(frame, percent=150)
-                        if scount == 6:
+                        if scount == final_count:
                             cap.release()
                             cv2.destroyAllWindows()
 
-
                 cv2.imshow('YourPoseGuide', frame)
-                # cv2.resize(frame, (1920, 1080))
-                # cv2.resizeWindow('Resized Window', 1920, 1080)
-                # cv2.imshow('Raw Webcam Feed', image)
 
                 if cv2.waitKey(10) & 0xFF == ord('q'):
                     break
