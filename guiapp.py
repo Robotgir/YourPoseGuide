@@ -9,7 +9,7 @@ import time
 import PoseModule as pm
 from PIL import Image, ImageTk
 from tkinter.ttk import Frame, Label, Style
-import HolisticModule as hm
+import pose_analysis_module as hm
 from tkinter import ttk
 import math
 count=0
