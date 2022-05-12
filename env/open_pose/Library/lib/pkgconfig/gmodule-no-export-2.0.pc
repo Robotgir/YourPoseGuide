@@ -1,0 +1,13 @@
+prefix=C:/ci_310/glib_1642686432177/_h_env/Library
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+gmodule_supported=true
+
+Name: GModule
+Description: Dynamic module loader for GLib
+Version: 2.69.1
+Requires: glib-2.0
+Libs: -L${libdir} -lgmodule-2.0
+Libs.private: -L${libdir} -lintl
+Cflags: -I${includedir}

@@ -1,0 +1,11 @@
+prefix=C:/ci_310/glib_1642686432177/_h_env/Library
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: GThread
+Description: Thread support for GLib
+Version: 2.69.1
+Requires: glib-2.0
+Libs: -L${libdir} -lgthread-2.0
+Libs.private: -L${libdir} -lintl
+Cflags: -I${includedir}

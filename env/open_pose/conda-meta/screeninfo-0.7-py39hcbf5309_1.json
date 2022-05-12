@@ -1,0 +1,325 @@
+{
+  "build": "py39hcbf5309_1",
+  "build_number": 1,
+  "channel": "https://conda.anaconda.org/conda-forge/win-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.9,<3.10.0a0",
+    "python_abi 3.9.* *_cp39"
+  ],
+  "extracted_package_dir": "C:\\Users\\girid\\anaconda3\\pkgs\\screeninfo-0.7-py39hcbf5309_1",
+  "features": "",
+  "files": [
+    "Lib/site-packages/screeninfo-0.7.dist-info/INSTALLER",
+    "Lib/site-packages/screeninfo-0.7.dist-info/LICENSE.md",
+    "Lib/site-packages/screeninfo-0.7.dist-info/METADATA",
+    "Lib/site-packages/screeninfo-0.7.dist-info/RECORD",
+    "Lib/site-packages/screeninfo-0.7.dist-info/REQUESTED",
+    "Lib/site-packages/screeninfo-0.7.dist-info/WHEEL",
+    "Lib/site-packages/screeninfo-0.7.dist-info/direct_url.json",
+    "Lib/site-packages/screeninfo-0.7.dist-info/top_level.txt",
+    "Lib/site-packages/screeninfo/__init__.py",
+    "Lib/site-packages/screeninfo/__main__.py",
+    "Lib/site-packages/screeninfo/__pycache__/__init__.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/__pycache__/__main__.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/__pycache__/common.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/__pycache__/screeninfo.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/__pycache__/test_documentation.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/__pycache__/test_screeninfo.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/__pycache__/util.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/common.py",
+    "Lib/site-packages/screeninfo/enumerators/__init__.py",
+    "Lib/site-packages/screeninfo/enumerators/__pycache__/__init__.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/enumerators/__pycache__/cygwin.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/enumerators/__pycache__/drm.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/enumerators/__pycache__/osx.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/enumerators/__pycache__/windows.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/enumerators/__pycache__/xinerama.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/enumerators/__pycache__/xrandr.cpython-39.pyc",
+    "Lib/site-packages/screeninfo/enumerators/cygwin.py",
+    "Lib/site-packages/screeninfo/enumerators/drm.py",
+    "Lib/site-packages/screeninfo/enumerators/osx.py",
+    "Lib/site-packages/screeninfo/enumerators/windows.py",
+    "Lib/site-packages/screeninfo/enumerators/xinerama.py",
+    "Lib/site-packages/screeninfo/enumerators/xrandr.py",
+    "Lib/site-packages/screeninfo/screeninfo.py",
+    "Lib/site-packages/screeninfo/test_documentation.py",
+    "Lib/site-packages/screeninfo/test_screeninfo.py",
+    "Lib/site-packages/screeninfo/util.py",
+    ".nonadmin"
+  ],
+  "fn": "screeninfo-0.7-py39hcbf5309_1.tar.bz2",
+  "license": "MIT AND BSD-3-Clause",
+  "link": {
+    "source": "C:\\Users\\girid\\anaconda3\\pkgs\\screeninfo-0.7-py39hcbf5309_1",
+    "type": 1
+  },
+  "md5": "1dbf79643bd3af494d005e8b2ec0edd6",
+  "name": "screeninfo",
+  "package_tarball_full_path": "C:\\Users\\girid\\anaconda3\\pkgs\\screeninfo-0.7-py39hcbf5309_1.tar.bz2",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "Lib/site-packages/screeninfo-0.7.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "sha256_in_prefix": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "size_in_bytes": 5
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo-0.7.dist-info/LICENSE.md",
+        "path_type": "hardlink",
+        "sha256": "f5827baa64f4220bdbdf42f90748a9a283acc761d19705105ddd7492061b5126",
+        "sha256_in_prefix": "f5827baa64f4220bdbdf42f90748a9a283acc761d19705105ddd7492061b5126",
+        "size_in_bytes": 2637
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo-0.7.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "b2063e3717dcb2f4ef56e3626dd3166fa8a5ed3d7f3e3f743042de10514b42f6",
+        "sha256_in_prefix": "b2063e3717dcb2f4ef56e3626dd3166fa8a5ed3d7f3e3f743042de10514b42f6",
+        "size_in_bytes": 1816
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo-0.7.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "047dee782c5fbcb6693d957d2f708b411f3f583e4d2cf72e633da942fc4e60bd",
+        "sha256_in_prefix": "047dee782c5fbcb6693d957d2f708b411f3f583e4d2cf72e633da942fc4e60bd",
+        "size_in_bytes": 2650
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo-0.7.dist-info/REQUESTED",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo-0.7.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "7b0c04b9e8a8d42d977874ef4f5ee7f1d6542603afc82582b7459534b0a53fda",
+        "sha256_in_prefix": "7b0c04b9e8a8d42d977874ef4f5ee7f1d6542603afc82582b7459534b0a53fda",
+        "size_in_bytes": 92
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo-0.7.dist-info/direct_url.json",
+        "path_type": "hardlink",
+        "sha256": "5ab36149923c507d79c73a06eee7e1994cc6dfda4d1a6616b1f9ca187d79c824",
+        "sha256_in_prefix": "5ab36149923c507d79c73a06eee7e1994cc6dfda4d1a6616b1f9ca187d79c824",
+        "size_in_bytes": 71
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo-0.7.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "a4bec19d8c4f5e1673616ac41e34b791c9fe0198227efc658ed24a7566382a04",
+        "sha256_in_prefix": "a4bec19d8c4f5e1673616ac41e34b791c9fe0198227efc658ed24a7566382a04",
+        "size_in_bytes": 11
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "9444963d5e0b26577d622e441f8aacd72d6cefcde4e7c9e81377b6dfb0f2efca",
+        "sha256_in_prefix": "9444963d5e0b26577d622e441f8aacd72d6cefcde4e7c9e81377b6dfb0f2efca",
+        "size_in_bytes": 77
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/__main__.py",
+        "path_type": "hardlink",
+        "sha256": "be3d41dbfea1453f630e2cb05c2480dd7bfc0f5a89c7a2cff0e64885acfadf00",
+        "sha256_in_prefix": "be3d41dbfea1453f630e2cb05c2480dd7bfc0f5a89c7a2cff0e64885acfadf00",
+        "size_in_bytes": 480
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "6ce3dbd55d3511149a9de581baafc956c4aad9a235ffc286af01e8544476e15d",
+        "sha256_in_prefix": "6ce3dbd55d3511149a9de581baafc956c4aad9a235ffc286af01e8544476e15d",
+        "size_in_bytes": 237
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/__pycache__/__main__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "88e603e0e7affa2dc5da2cd77c282dd4b8435ba1db89750cac08f7b5a73769d6",
+        "sha256_in_prefix": "88e603e0e7affa2dc5da2cd77c282dd4b8435ba1db89750cac08f7b5a73769d6",
+        "size_in_bytes": 874
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/__pycache__/common.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "0236c6db472b8d09bc9db1bba39463165fc1596789dfe1ba3647cce392f346c0",
+        "sha256_in_prefix": "0236c6db472b8d09bc9db1bba39463165fc1596789dfe1ba3647cce392f346c0",
+        "size_in_bytes": 1473
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/__pycache__/screeninfo.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "517ee04f77938fd8df9c667b659b16f081785448144a765821ff3ecef290bdc9",
+        "sha256_in_prefix": "517ee04f77938fd8df9c667b659b16f081785448144a765821ff3ecef290bdc9",
+        "size_in_bytes": 1118
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/__pycache__/test_documentation.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "ee21562d7fc12c4f3a2a4d97cfb6519f6aabe9946425a798dd25febcda3da8e7",
+        "sha256_in_prefix": "ee21562d7fc12c4f3a2a4d97cfb6519f6aabe9946425a798dd25febcda3da8e7",
+        "size_in_bytes": 1431
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/__pycache__/test_screeninfo.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "5a5c99f78d53131484f418299c3c7da3082f5c82ae9f2c16eaea41831e87f73d",
+        "sha256_in_prefix": "5a5c99f78d53131484f418299c3c7da3082f5c82ae9f2c16eaea41831e87f73d",
+        "size_in_bytes": 833
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/__pycache__/util.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "4faf60c4d03220520032e0141286cf34aa2c2995310692c10faff96f64129c75",
+        "sha256_in_prefix": "4faf60c4d03220520032e0141286cf34aa2c2995310692c10faff96f64129c75",
+        "size_in_bytes": 492
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/common.py",
+        "path_type": "hardlink",
+        "sha256": "e1f545680f7bf23eb20b49b3e492e65167c76f4c1e3b743c9ac60a70234f1383",
+        "sha256_in_prefix": "e1f545680f7bf23eb20b49b3e492e65167c76f4c1e3b743c9ac60a70234f1383",
+        "size_in_bytes": 904
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "44cd1005350fc7057f698436a331dfa7972ffd318f9e7fdc7eb37dc2a6d3d5d2",
+        "sha256_in_prefix": "44cd1005350fc7057f698436a331dfa7972ffd318f9e7fdc7eb37dc2a6d3d5d2",
+        "size_in_bytes": 219
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/__pycache__/__init__.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "9777b0c68defc624bb6cbd72e5429119ae1664da62491b23e172c5b8ba7f4243",
+        "sha256_in_prefix": "9777b0c68defc624bb6cbd72e5429119ae1664da62491b23e172c5b8ba7f4243",
+        "size_in_bytes": 398
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/__pycache__/cygwin.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "395b38a70d315111b2858db36bc7403a19200017b9885e074adfcd96af7c393d",
+        "sha256_in_prefix": "395b38a70d315111b2858db36bc7403a19200017b9885e074adfcd96af7c393d",
+        "size_in_bytes": 1763
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/__pycache__/drm.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "523de231db292a01ce75a6e8bb21c0da5d3b7585e8225e7adebaa6b7180e617a",
+        "sha256_in_prefix": "523de231db292a01ce75a6e8bb21c0da5d3b7585e8225e7adebaa6b7180e617a",
+        "size_in_bytes": 8125
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/__pycache__/osx.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "a78518e34360f6c2988fa9a56334a0876b599d470e9d5ae3a137a21c0fcee1f7",
+        "sha256_in_prefix": "a78518e34360f6c2988fa9a56334a0876b599d470e9d5ae3a137a21c0fcee1f7",
+        "size_in_bytes": 810
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/__pycache__/windows.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "ecdb532ea148faa626d7b666c37b73b712c2bfb0a6d21f0f6be26aac7210b3d5",
+        "sha256_in_prefix": "ecdb532ea148faa626d7b666c37b73b712c2bfb0a6d21f0f6be26aac7210b3d5",
+        "size_in_bytes": 2126
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/__pycache__/xinerama.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "dea29ad35176080bc3ecfd491fd73d2afe5df8dd36c64079313f4311691417d3",
+        "sha256_in_prefix": "dea29ad35176080bc3ecfd491fd73d2afe5df8dd36c64079313f4311691417d3",
+        "size_in_bytes": 1460
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/__pycache__/xrandr.cpython-39.pyc",
+        "path_type": "hardlink",
+        "sha256": "bd91ddc7093bac082deb4daae48ba5055c266da0da6ee0b045b511f93069fdd3",
+        "sha256_in_prefix": "bd91ddc7093bac082deb4daae48ba5055c266da0da6ee0b045b511f93069fdd3",
+        "size_in_bytes": 3150
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/cygwin.py",
+        "path_type": "hardlink",
+        "sha256": "d523381e7f694ade2f24e2781fb7100bb7ff9c9f08bfb63d2e7ec11d282520b0",
+        "sha256_in_prefix": "d523381e7f694ade2f24e2781fb7100bb7ff9c9f08bfb63d2e7ec11d282520b0",
+        "size_in_bytes": 1654
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/drm.py",
+        "path_type": "hardlink",
+        "sha256": "90713130e22afb78c404adaff51ad99ed7371922ede9a3164d5cf1decb3e0fca",
+        "sha256_in_prefix": "90713130e22afb78c404adaff51ad99ed7371922ede9a3164d5cf1decb3e0fca",
+        "size_in_bytes": 10323
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/osx.py",
+        "path_type": "hardlink",
+        "sha256": "60001fe64ba0c1cd62a135659b9f8f4275695862f1e93b9e814288d86fdcf1be",
+        "sha256_in_prefix": "60001fe64ba0c1cd62a135659b9f8f4275695862f1e93b9e814288d86fdcf1be",
+        "size_in_bytes": 716
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/windows.py",
+        "path_type": "hardlink",
+        "sha256": "9b0e7c8a4adcf68d8277a32380b3d6780b108b121f974be8f9855316e1b1a1de",
+        "sha256_in_prefix": "9b0e7c8a4adcf68d8277a32380b3d6780b108b121f974be8f9855316e1b1a1de",
+        "size_in_bytes": 3131
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/xinerama.py",
+        "path_type": "hardlink",
+        "sha256": "95b4c0d1b6f2b6d40952864c690471ba63d28eae59e88e413d42bf9a3bb837b7",
+        "sha256_in_prefix": "95b4c0d1b6f2b6d40952864c690471ba63d28eae59e88e413d42bf9a3bb837b7",
+        "size_in_bytes": 1581
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/enumerators/xrandr.py",
+        "path_type": "hardlink",
+        "sha256": "265487c5f878401922a56bea49f75059961d02114b4a7588ada9aa2d7e9614a4",
+        "sha256_in_prefix": "265487c5f878401922a56bea49f75059961d02114b4a7588ada9aa2d7e9614a4",
+        "size_in_bytes": 4353
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/screeninfo.py",
+        "path_type": "hardlink",
+        "sha256": "9d722c17e3640f26c751ffd5c1f62bc0f3354801aef919e946fd23eea88a461c",
+        "sha256_in_prefix": "9d722c17e3640f26c751ffd5c1f62bc0f3354801aef919e946fd23eea88a461c",
+        "size_in_bytes": 1064
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/test_documentation.py",
+        "path_type": "hardlink",
+        "sha256": "82aa40a03f288736d8ce1a1bbcec4350c69be4f94d9c99b36cd8e004b484d9d5",
+        "sha256_in_prefix": "82aa40a03f288736d8ce1a1bbcec4350c69be4f94d9c99b36cd8e004b484d9d5",
+        "size_in_bytes": 1563
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/test_screeninfo.py",
+        "path_type": "hardlink",
+        "sha256": "b52e0555ff77ddbff2a86e50a1c6e6d11374188415b16188def61c18d0df85b3",
+        "sha256_in_prefix": "b52e0555ff77ddbff2a86e50a1c6e6d11374188415b16188def61c18d0df85b3",
+        "size_in_bytes": 485
+      },
+      {
+        "_path": "Lib/site-packages/screeninfo/util.py",
+        "path_type": "hardlink",
+        "sha256": "6075c9d4feaf6249446645736649f08bb505f46d229ed639f8f1d9225258a2c6",
+        "sha256_in_prefix": "6075c9d4feaf6249446645736649f08bb505f46d229ed639f8f1d9225258a2c6",
+        "size_in_bytes": 281
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "screeninfo",
+  "sha256": "57e46f9777ac3c1eb7e00e5f1999fa547dc6d6a6c74f8f1bdd8d3e86a426c0ce",
+  "size": 24989,
+  "subdir": "win-64",
+  "timestamp": 1636292503863,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/win-64/screeninfo-0.7-py39hcbf5309_1.tar.bz2",
+  "version": "0.7"
+}
